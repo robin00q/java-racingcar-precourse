@@ -40,4 +40,21 @@ class CarTest {
                 Arguments.of(new Car(carName, 2), CarMovePolicy.STOP, new Car(carName, 2)),
                 Arguments.of(new Car(carName, 3), CarMovePolicy.STOP, new Car(carName, 3)));
     }
+
+    @ParameterizedTest(name = "자동차의 이름과 위치를 반환한다.")
+    @MethodSource("car_to_string_parameter")
+    void car_to_string(Car car, String expected) {
+        // given: none
+
+        // when, then
+        assertThat(car.toString()).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> car_to_string_parameter() {
+        return Stream.of(
+                Arguments.of(new Car("test0", 0), "test0 : "),
+                Arguments.of(new Car("test1", 1), "test1 : -"),
+                Arguments.of(new Car("test5", 5), "test5 : -----"));
+    }
+
 }

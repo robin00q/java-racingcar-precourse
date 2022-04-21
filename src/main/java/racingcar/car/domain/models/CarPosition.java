@@ -2,6 +2,7 @@ package racingcar.car.domain.models;
 
 import java.util.Objects;
 import racingcar.car.domain.errors.CarErrors;
+import racingcar.util.StringUtils;
 
 public class CarPosition {
 
@@ -22,6 +23,15 @@ public class CarPosition {
 
     public CarPosition moveForward() {
         return new CarPosition(position + 1);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (int iterator = 0 ; iterator < position ; iterator++) {
+            builder.append(StringUtils.DASH);
+        }
+        return builder.toString();
     }
 
     @Override

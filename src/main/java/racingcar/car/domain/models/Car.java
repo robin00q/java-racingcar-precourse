@@ -1,6 +1,7 @@
 package racingcar.car.domain.models;
 
 import java.util.Objects;
+import racingcar.util.StringUtils;
 
 public class Car {
 
@@ -29,6 +30,15 @@ public class Car {
             return new Car(name, position.moveForward());
         }
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return name.toString()
+                + StringUtils.SPACE
+                + StringUtils.COLON
+                + StringUtils.SPACE
+                + position.toString();
     }
 
     @Override

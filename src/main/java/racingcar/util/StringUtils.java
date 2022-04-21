@@ -3,7 +3,9 @@ package racingcar.util;
 public class StringUtils {
 
     private static final String EMPTY = "";
-    private static final String SPACE = " ";
+    public static final String SPACE = " ";
+    public static final String DASH = "-";
+    public static final String COLON = ":";
 
     private StringUtils() {
     }
