@@ -24,7 +24,7 @@ class CarsTest {
         String third = "june";
 
         // when, then
-        assertThatCode(() -> new Cars(Arrays.asList(first, second, third)))
+        assertThatCode(() -> Cars.initCarsByName(Arrays.asList(first, second, third)))
                 .doesNotThrowAnyException();
     }
 
@@ -35,7 +35,7 @@ class CarsTest {
 
         // when, then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Cars(cars))
+                .isThrownBy(() -> Cars.initCarsByName(cars))
                 .withMessage(CarErrors.CARS_EMPTY_ERROR);
     }
 

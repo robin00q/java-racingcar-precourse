@@ -8,17 +8,23 @@ public class Cars {
 
     private final List<Car> cars;
 
-    public Cars(List<String> names) {
+    private Cars(List<Car> cars) {
+        validate(cars);
+        this.cars = cars;
+    }
+
+    public static Cars initCarsByName(List<String> names) {
         validate(names);
 
-        cars = new ArrayList<>();
-
+        List<Car> cars = new ArrayList<>();
         for (String name : names) {
             cars.add(new Car(name));
         }
+
+        return new Cars(cars);
     }
 
-    private void validate(List<String> names) {
+    private static void validate(List<?> names) {
         if (names == null || names.isEmpty()) {
             throw new IllegalArgumentException(CarErrors.CARS_EMPTY_ERROR);
         }
