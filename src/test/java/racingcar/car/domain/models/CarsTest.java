@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import racingcar.car.domain.errors.CarErrors;
 import racingcar.car.domain.external.CarMovePolicyStrategy;
+import racingcar.util.StringUtils;
 
 class CarsTest {
 
@@ -70,4 +71,26 @@ class CarsTest {
                         initialCars));
     }
 
+    @ParameterizedTest(name = "자동차들의 이름과 위치를 반환한다.")
+    @MethodSource("cars_to_string_parameter")
+    void cars_to_string(Cars cars, String expected) {
+        // given: none
+
+        // when, then
+        assertThat(cars.toString()).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> cars_to_string_parameter() {
+        return Stream.of(
+                Arguments.of(
+                        new Cars(Arrays.asList(new Car("a", 1), new Car("b", 2), new Car("c", 3))),
+                        "a : -" + StringUtils.NEW_LINE
+                                + "b : --" + StringUtils.NEW_LINE
+                                + "c : ---" + StringUtils.NEW_LINE),
+                Arguments.of(
+                        initialCars,
+                        firstName + " : " + StringUtils.NEW_LINE
+                                + secondName + " : " + StringUtils.NEW_LINE
+                                + thirdName + " : " + StringUtils.NEW_LINE));
+    }
 }

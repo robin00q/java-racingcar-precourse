@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import racingcar.car.domain.errors.CarErrors;
 import racingcar.car.domain.external.CarMovePolicyStrategy;
+import racingcar.util.StringUtils;
 
 public class Cars {
 
@@ -40,6 +41,17 @@ public class Cars {
         }
 
         return new Cars(movedCars);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        for (Car car : cars) {
+            builder.append(car.toString()).append(StringUtils.NEW_LINE);
+        }
+
+        return builder.toString();
     }
 
     @Override
