@@ -100,4 +100,32 @@ class CarTest {
                 .withMessage(CarErrors.CAR_POSITION_EMPTY_ERROR);
     }
 
+    @ParameterizedTest(name = "자동차가 같은 위치값을 갖는지 비교한다.")
+    @MethodSource("compare_car_has_same_position_parameter")
+    void compare_car_has_same_position(Car car, CarPosition position, boolean expected) {
+        // given: none
+
+        // when, then
+        assertThat(car.hasSamePosition(position)).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> compare_car_has_same_position_parameter() {
+        return Stream.of(
+                Arguments.of(new Car(carName, 1), new CarPosition(1), true),
+                Arguments.of(new Car(carName, 1), new CarPosition(2), false));
+    }
+
+    @DisplayName("자동차의 위치값이 동등하지 비교하기 위해서, 항상 비교대상이 존재해야한다")
+    @Test
+    void compare_car_has_same_position_invalid() {
+        // given
+        Car car = new Car(carName);
+
+        // when, then
+        assertThatIllegalStateException()
+                .isThrownBy(() -> car.hasSamePosition(null))
+                .withMessage(CarErrors.CAR_POSITION_EMPTY_ERROR);
+    }
+
+
 }

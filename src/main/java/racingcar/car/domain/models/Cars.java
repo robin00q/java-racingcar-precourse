@@ -43,7 +43,17 @@ public class Cars {
         return new Cars(movedCars);
     }
 
-    public CarPosition getLargestCarPosition() {
+    public Cars getWinners() {
+        return getLargestPositionCars(getLargestCarPosition());
+    }
+
+    private Cars getLargestPositionCars(CarPosition largestPosition) {
+        List<Car> winners = new ArrayList<>(cars);
+        winners.removeIf(car -> !car.hasSamePosition(largestPosition));
+        return new Cars(winners);
+    }
+
+    private CarPosition getLargestCarPosition() {
         CarPosition maxCarPosition = CarPosition.initByZero();
 
         for (Car car : cars) {

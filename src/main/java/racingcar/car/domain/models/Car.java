@@ -41,6 +41,11 @@ public class Car {
         return position.getGreaterCarPosition(anotherCarPosition);
     }
 
+    public boolean hasSamePosition(CarPosition targetPosition) {
+        validate(targetPosition);
+        return position.equals(targetPosition);
+    }
+
     private void validateStrategy(CarMovePolicyStrategy strategy) {
         if (strategy == null) {
             throw new IllegalStateException(CarErrors.CAR_MOVE_STRATEGY_ERROR);
