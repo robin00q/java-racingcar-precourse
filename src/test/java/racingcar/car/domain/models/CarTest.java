@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import racingcar.car.domain.external.CarMovePolicyPort;
 
 class CarTest {
 
@@ -26,7 +27,7 @@ class CarTest {
 
     @ParameterizedTest(name = "자동차 한대를 앞으로 전진한다.")
     @MethodSource("move_car_parameter")
-    void move_car(Car beforeMoved, CarMovePolicy policy, Car afterMoved) {
+    void move_car(Car beforeMoved, CarMovePolicyPort policy, Car afterMoved) {
         // given: none
 
         // when, then
@@ -35,10 +36,10 @@ class CarTest {
 
     static Stream<Arguments> move_car_parameter() {
         return Stream.of(
-                Arguments.of(new Car(carName, 0), CarMovePolicy.MOVE, new Car(carName, 1)),
-                Arguments.of(new Car(carName, 1), CarMovePolicy.MOVE, new Car(carName, 2)),
-                Arguments.of(new Car(carName, 2), CarMovePolicy.STOP, new Car(carName, 2)),
-                Arguments.of(new Car(carName, 3), CarMovePolicy.STOP, new Car(carName, 3)));
+                Arguments.of(new Car(carName, 0), (CarMovePolicyPort) () -> CarMovePolicy.MOVE, new Car(carName, 1)),
+                Arguments.of(new Car(carName, 1), (CarMovePolicyPort) () -> CarMovePolicy.MOVE, new Car(carName, 2)),
+                Arguments.of(new Car(carName, 2), (CarMovePolicyPort) () -> CarMovePolicy.STOP, new Car(carName, 2)),
+                Arguments.of(new Car(carName, 3), (CarMovePolicyPort) () -> CarMovePolicy.STOP, new Car(carName, 3)));
     }
 
     @ParameterizedTest(name = "자동차의 이름과 위치를 반환한다.")

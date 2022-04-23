@@ -1,6 +1,7 @@
 package racingcar.car.domain.models;
 
 import java.util.Objects;
+import racingcar.car.domain.external.CarMovePolicyPort;
 import racingcar.util.StringUtils;
 
 public class Car {
@@ -25,8 +26,8 @@ public class Car {
         this.position = position;
     }
 
-    public Car moveForward(CarMovePolicy movePolicy) {
-        if (movePolicy.isMove()) {
+    public Car moveForward(CarMovePolicyPort port) {
+        if (port.getCarMovePolicy().isMove()) {
             return new Car(name, position.moveForward());
         }
         return this;
