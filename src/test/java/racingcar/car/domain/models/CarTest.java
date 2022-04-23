@@ -71,4 +71,33 @@ class CarTest {
                 .withMessage(CarErrors.CAR_MOVE_STRATEGY_ERROR);
     }
 
+    @DisplayName("두 자동차 중, 더 큰 위치값을 갖는 자동차의 위치값을 반환한다.")
+    @Test
+    void get_greater_car_position_car_between_two_cars() {
+        // given
+        int lessPosition = 9;
+        int greaterPosition = 10;
+
+        Car car = new Car(carName, lessPosition);
+        CarPosition anotherCarPosition = new CarPosition(greaterPosition);
+
+        // when
+        CarPosition position = car.getGreaterCarPosition(anotherCarPosition);
+
+        // then
+        assertThat(position).isEqualTo(new CarPosition(greaterPosition));
+    }
+
+    @DisplayName("두 자동차의 위치정보를 비교하려면, 항상 비교대상이 존재해야한다.")
+    @Test
+    void get_greater_car_position_car_between_two_cars_invalid() {
+        // given
+        Car car = new Car(carName);
+
+        // when, then
+        assertThatIllegalStateException()
+                .isThrownBy(() -> car.getGreaterCarPosition(null))
+                .withMessage(CarErrors.CAR_POSITION_EMPTY_ERROR);
+    }
+
 }

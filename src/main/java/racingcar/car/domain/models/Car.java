@@ -36,9 +36,20 @@ public class Car {
         return this;
     }
 
+    public CarPosition getGreaterCarPosition(CarPosition anotherCarPosition) {
+        validate(anotherCarPosition);
+        return position.getGreaterCarPosition(anotherCarPosition);
+    }
+
     private void validateStrategy(CarMovePolicyStrategy strategy) {
         if (strategy == null) {
             throw new IllegalStateException(CarErrors.CAR_MOVE_STRATEGY_ERROR);
+        }
+    }
+
+    private void validate(CarPosition carPosition) {
+        if (carPosition == null) {
+            throw new IllegalStateException(CarErrors.CAR_POSITION_EMPTY_ERROR);
         }
     }
 
