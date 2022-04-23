@@ -2,6 +2,7 @@ package racingcar.car.domain.models;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -9,7 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import racingcar.car.domain.external.CarMovePolicyPort;
+import racingcar.car.domain.errors.CarErrors;
+import racingcar.car.domain.external.CarMovePolicyStrategy;
 
 class CarTest {
 
@@ -27,7 +29,7 @@ class CarTest {
 
     @ParameterizedTest(name = "자동차 한대를 앞으로 전진한다.")
     @MethodSource("move_car_parameter")
-    void move_car(Car beforeMoved, CarMovePolicyPort policy, Car afterMoved) {
+    void move_car(Car beforeMoved, CarMovePolicyStrategy policy, Car afterMoved) {
         // given: none
 
         // when, then
@@ -36,10 +38,10 @@ class CarTest {
 
     static Stream<Arguments> move_car_parameter() {
         return Stream.of(
-                Arguments.of(new Car(carName, 0), (CarMovePolicyPort) () -> CarMovePolicy.MOVE, new Car(carName, 1)),
-                Arguments.of(new Car(carName, 1), (CarMovePolicyPort) () -> CarMovePolicy.MOVE, new Car(carName, 2)),
-                Arguments.of(new Car(carName, 2), (CarMovePolicyPort) () -> CarMovePolicy.STOP, new Car(carName, 2)),
-                Arguments.of(new Car(carName, 3), (CarMovePolicyPort) () -> CarMovePolicy.STOP, new Car(carName, 3)));
+                Arguments.of(new Car(carName, 0), (CarMovePolicyStrategy) () -> CarMovePolicy.MOVE, new Car(carName, 1)),
+                Arguments.of(new Car(carName, 1), (CarMovePolicyStrategy) () -> CarMovePolicy.MOVE, new Car(carName, 2)),
+                Arguments.of(new Car(carName, 2), (CarMovePolicyStrategy) () -> CarMovePolicy.STOP, new Car(carName, 2)),
+                Arguments.of(new Car(carName, 3), (CarMovePolicyStrategy) () -> CarMovePolicy.STOP, new Car(carName, 3)));
     }
 
     @ParameterizedTest(name = "자동차의 이름과 위치를 반환한다.")
@@ -56,6 +58,17 @@ class CarTest {
                 Arguments.of(new Car("test0", 0), "test0 : "),
                 Arguments.of(new Car("test1", 1), "test1 : -"),
                 Arguments.of(new Car("test5", 5), "test5 : -----"));
+    }
+
+    @DisplayName("자동차들을 움직일 때, 올바르지 않은 전략이 파라미터로 들어오는 경우 처리")
+    @Test
+    void move_cars_invalid_parameter() {
+        // given: none
+
+        // when
+        assertThatIllegalStateException()
+                .isThrownBy(() -> new Car(carName).moveForward(null))
+                .withMessage(CarErrors.CAR_MOVE_STRATEGY_ERROR);
     }
 
 }

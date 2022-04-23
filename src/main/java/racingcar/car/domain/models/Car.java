@@ -1,7 +1,8 @@
 package racingcar.car.domain.models;
 
 import java.util.Objects;
-import racingcar.car.domain.external.CarMovePolicyPort;
+import racingcar.car.domain.errors.CarErrors;
+import racingcar.car.domain.external.CarMovePolicyStrategy;
 import racingcar.util.StringUtils;
 
 public class Car {
@@ -26,11 +27,19 @@ public class Car {
         this.position = position;
     }
 
-    public Car moveForward(CarMovePolicyPort port) {
-        if (port.getCarMovePolicy().isMove()) {
+    public Car moveForward(CarMovePolicyStrategy strategy) {
+        validateStrategy(strategy);
+
+        if (strategy.getCarMovePolicy().isMove()) {
             return new Car(name, position.moveForward());
         }
         return this;
+    }
+
+    private void validateStrategy(CarMovePolicyStrategy strategy) {
+        if (strategy == null) {
+            throw new IllegalStateException(CarErrors.CAR_MOVE_STRATEGY_ERROR);
+        }
     }
 
     @Override

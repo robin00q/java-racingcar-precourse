@@ -2,7 +2,7 @@ package racingcar.car.domain.external;
 
 import racingcar.car.domain.models.CarMovePolicy;
 
-public interface CarMovePolicyPort {
+public interface CarMovePolicyStrategy {
 
     CarMovePolicy getCarMovePolicy();
 }

@@ -2,13 +2,15 @@ package racingcar.car.domain.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import racingcar.car.domain.errors.CarErrors;
+import racingcar.car.domain.external.CarMovePolicyStrategy;
 
 public class Cars {
 
     private final List<Car> cars;
 
-    private Cars(List<Car> cars) {
+    public Cars(List<Car> cars) {
         validate(cars);
         this.cars = cars;
     }
@@ -28,5 +30,32 @@ public class Cars {
         if (names == null || names.isEmpty()) {
             throw new IllegalArgumentException(CarErrors.CARS_EMPTY_ERROR);
         }
+    }
+
+    public Cars moveForward(CarMovePolicyStrategy strategy) {
+        List<Car> movedCars = new ArrayList<>();
+
+        for (Car car : cars) {
+            movedCars.add(car.moveForward(strategy));
+        }
+
+        return new Cars(movedCars);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Cars cars1 = (Cars) o;
+        return Objects.equals(cars, cars1.cars);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cars);
     }
 }
