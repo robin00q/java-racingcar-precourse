@@ -15,10 +15,29 @@ public class CarPosition {
         this.position = position;
     }
 
+    public CarPosition getGreaterCarPosition(CarPosition anotherPosition) {
+        validate(anotherPosition);
+
+        if (hasGreaterPositionThan(anotherPosition)) {
+            return new CarPosition(position);
+        }
+        return new CarPosition(anotherPosition.position);
+    }
+
     private void validate(int position) {
         if (position < MINIMUM_CAR_POSITION) {
             throw new IllegalArgumentException(CarErrors.CAR_POSITION_LESS_THAN_ZERO_ERROR);
         }
+    }
+
+    private void validate(CarPosition carPosition) {
+        if (carPosition == null) {
+            throw new IllegalStateException(CarErrors.CAR_POSITION_EMPTY_ERROR);
+        }
+    }
+
+    private boolean hasGreaterPositionThan(CarPosition anotherPosition) {
+        return this.position > anotherPosition.position;
     }
 
     public CarPosition moveForward() {

@@ -8,6 +8,7 @@ public class CarErrors {
 
     // 자동차 위치(CarPosition) 오류
     public static final String CAR_POSITION_LESS_THAN_ZERO_ERROR = "[ERROR] 자동차의 위치 오류입니다. 최소 자동차 위치 : ";
+    public static final String CAR_POSITION_EMPTY_ERROR = "[ERROR] 위치정보 비교 중, 자동차의 위치정보가 존재하지 않습니다.";
 
     // 자동차 움직임(CarMovePolicyStrategy) 전략 오류
     public static final String CAR_MOVE_STRATEGY_ERROR = "[ERROR] 자동차를 움직이기 위한 전략이 존재하지 않습니다.";
