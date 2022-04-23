@@ -15,6 +15,10 @@ public class CarPosition {
         this.position = position;
     }
 
+    public static CarPosition initByZero() {
+        return new CarPosition(MINIMUM_CAR_POSITION);
+    }
+
     public CarPosition getGreaterCarPosition(CarPosition anotherPosition) {
         validate(anotherPosition);
 

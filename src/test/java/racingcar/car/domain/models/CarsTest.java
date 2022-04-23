@@ -93,4 +93,25 @@ class CarsTest {
                                 + secondName + " : " + StringUtils.NEW_LINE
                                 + thirdName + " : " + StringUtils.NEW_LINE));
     }
+
+    @DisplayName("자동차들 중, 가장 큰 위치값이 몇인지 판별한다.")
+    @Test
+    void get_largest_car_position() {
+        // given
+        int lessPosition1 = 1;
+        int lessPosition2 = 2;
+        int largestPosition = 3;
+
+        Cars cars = new Cars(Arrays.asList(
+                new Car(firstName, lessPosition1),
+                new Car(secondName, lessPosition2),
+                new Car(thirdName, largestPosition)));
+
+        // when
+        CarPosition largest = cars.getLargestCarPosition();
+
+        // then
+        assertThat(largest).isEqualTo(new CarPosition(largestPosition));
+    }
+
 }

@@ -43,6 +43,16 @@ public class Cars {
         return new Cars(movedCars);
     }
 
+    public CarPosition getLargestCarPosition() {
+        CarPosition maxCarPosition = CarPosition.initByZero();
+
+        for (Car car : cars) {
+            maxCarPosition = car.getGreaterCarPosition(maxCarPosition);
+        }
+
+        return maxCarPosition;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
