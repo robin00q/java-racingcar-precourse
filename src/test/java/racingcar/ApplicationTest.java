@@ -60,6 +60,16 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 비어있는_이름에_대한_예외_처리() {
+        assertSimpleTest(
+                () -> {
+                    runException("lee,,june");
+                    assertThat(output()).contains(ERROR_MESSAGE);
+                }
+        );
+    }
+
+    @Test
     void 같은_이름에_대한_예외_처리() {
         assertSimpleTest(
                 () -> {

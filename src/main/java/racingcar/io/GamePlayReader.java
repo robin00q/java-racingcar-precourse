@@ -65,12 +65,18 @@ public class GamePlayReader {
     }
 
     private static void validatePlayerNameFormat(String[] names) {
+        if (names.length == 0) {
+            throw new IllegalArgumentException(INPUT_CAR_NAME_EMPTY_ERROR);
+        }
         for (String name : names) {
             validateName(name);
         }
     }
 
     private static void validateName(String name) {
+        if (name.isEmpty()) {
+            throw new IllegalArgumentException(INPUT_CAR_NAME_EMPTY_ERROR);
+        }
         if (name.length() > CarName.MAX_CAR_NAME_LENGTH) {
             throw new IllegalArgumentException(INPUT_CAR_NAME_LENGTH_ERROR);
         }
