@@ -16,6 +16,9 @@ public class CarErrors {
     // 자동차들(Cars) 오류
     public static final String CARS_EMPTY_ERROR = "[ERROR] 자동차를 최소 한대는 입력해야합니다.";
 
+    // 승리자들(Winners) 오류
+    public static final String WINNERS_EMPTY_ERROR = "[ERROR] 최소 한명의 승리자가 존재해야합니다.";
+
     private CarErrors() {
     }
 }
