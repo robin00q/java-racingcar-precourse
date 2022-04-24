@@ -50,6 +50,18 @@ class CarsTest {
         return Stream.of(null, Collections.emptyList());
     }
 
+    @DisplayName("자동차들의 이름은 같은 이름을 가질 수 없다.")
+    @Test
+    void create_cars_with_same_names() {
+        // given
+        String duplicateName = "dup";
+
+        // when, then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Cars(Arrays.asList(new Car(duplicateName), new Car(duplicateName))))
+                .withMessage(CarErrors.CARS_DUPLICATE_NAME_ERROR);
+    }
+
     @ParameterizedTest(name = "전략을 통해, 자동차 여러대들을 움직인다.")
     @MethodSource("move_cars_forward_parameter")
     void move_cars_forward(Cars before, CarMovePolicyStrategy strategy, Cars expected) {

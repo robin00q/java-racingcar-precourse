@@ -18,6 +18,7 @@ public class CarErrors {
 
     // 승리자들(Winners) 오류
     public static final String WINNERS_EMPTY_ERROR = "[ERROR] 최소 한명의 승리자가 존재해야합니다.";
+    public static final String CARS_DUPLICATE_NAME_ERROR = "[ERROR] 자동차들은 같은 이름을 가질 수 없습니다.";
 
     private CarErrors() {
     }

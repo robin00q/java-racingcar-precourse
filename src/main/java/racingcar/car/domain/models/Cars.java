@@ -1,8 +1,10 @@
 package racingcar.car.domain.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import racingcar.car.domain.errors.CarErrors;
 import racingcar.car.domain.external.CarMovePolicyStrategy;
 import racingcar.util.StringUtils;
@@ -13,6 +15,7 @@ public class Cars {
 
     public Cars(List<Car> cars) {
         validate(cars);
+        validateName(getNames(cars));
         this.cars = cars;
     }
 
@@ -30,6 +33,14 @@ public class Cars {
     private static void validate(List<?> names) {
         if (names == null || names.isEmpty()) {
             throw new IllegalArgumentException(CarErrors.CARS_EMPTY_ERROR);
+        }
+    }
+
+    private static void validateName(List<String> names) {
+        Set<String> unDuplicatedSet = new HashSet<>(names);
+
+        if (unDuplicatedSet.size() != names.size()) {
+            throw new IllegalArgumentException(CarErrors.CARS_DUPLICATE_NAME_ERROR);
         }
     }
 
@@ -61,6 +72,16 @@ public class Cars {
         }
 
         return maxCarPosition;
+    }
+
+    private List<String> getNames(List<Car> cars) {
+        List<String> names = new ArrayList<>();
+
+        for (Car car : cars) {
+            names.add(car.getCarName());
+        }
+
+        return names;
     }
 
     @Override
