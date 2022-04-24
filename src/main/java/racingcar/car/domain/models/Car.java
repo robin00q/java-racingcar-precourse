@@ -58,6 +58,10 @@ public class Car {
         }
     }
 
+    public String getCarName() {
+        return name.toString();
+    }
+
     @Override
     public String toString() {
         return name.toString()

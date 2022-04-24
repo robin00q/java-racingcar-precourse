@@ -6,6 +6,7 @@ public class StringUtils {
     public static final String SPACE = " ";
     public static final String DASH = "-";
     public static final String COLON = ":";
+    public static final String COMMA = ",";
     public static final String NEW_LINE = "\n";
 
     private StringUtils() {
