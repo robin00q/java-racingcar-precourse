@@ -24,6 +24,10 @@ public class RandomNumberGenerator {
         }
     }
 
+    public int getGenerated() {
+        return generated;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
