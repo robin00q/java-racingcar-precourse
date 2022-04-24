@@ -17,11 +17,11 @@ public class CarName {
 
     private void validate(String name) {
         if (name == null || StringUtils.removeSpace(name).isEmpty()) {
-            throw new IllegalArgumentException(CarErrors.CAR_NAME_EMPTY_ERROR);
+            throw new IllegalStateException(CarErrors.CAR_NAME_EMPTY_ERROR);
         }
 
         if (name.length() > MAX_CAR_NAME_LENGTH) {
-            throw new IllegalArgumentException(CarErrors.CAR_NAME_GREATER_THAN_NAME_RULE_ERROR + MAX_CAR_NAME_LENGTH);
+            throw new IllegalStateException(CarErrors.CAR_NAME_GREATER_THAN_NAME_RULE_ERROR + MAX_CAR_NAME_LENGTH);
         }
     }
 

@@ -30,7 +30,7 @@ public class CarPosition {
 
     private void validate(int position) {
         if (position < MINIMUM_CAR_POSITION) {
-            throw new IllegalArgumentException(CarErrors.CAR_POSITION_LESS_THAN_ZERO_ERROR);
+            throw new IllegalStateException(CarErrors.CAR_POSITION_LESS_THAN_ZERO_ERROR);
         }
     }
 

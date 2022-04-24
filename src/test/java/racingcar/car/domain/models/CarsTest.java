@@ -2,7 +2,7 @@ package racingcar.car.domain.models;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,7 +41,7 @@ class CarsTest {
         // given: none
 
         // when, then
-        assertThatIllegalArgumentException()
+        assertThatIllegalStateException()
                 .isThrownBy(() -> Cars.initCarsByName(cars))
                 .withMessage(CarErrors.CARS_EMPTY_ERROR);
     }
@@ -57,7 +57,7 @@ class CarsTest {
         String duplicateName = "dup";
 
         // when, then
-        assertThatIllegalArgumentException()
+        assertThatIllegalStateException()
                 .isThrownBy(() -> new Cars(Arrays.asList(new Car(duplicateName), new Car(duplicateName))))
                 .withMessage(CarErrors.CARS_DUPLICATE_NAME_ERROR);
     }

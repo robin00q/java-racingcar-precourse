@@ -2,7 +2,6 @@ package racingcar.car.domain.models;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +29,7 @@ class CarPositionTest {
         int invalidPosition = -1;
 
         // when, then
-        assertThatIllegalArgumentException()
+        assertThatIllegalStateException()
                 .isThrownBy(() -> new CarPosition(invalidPosition))
                 .withMessageStartingWith(CarErrors.CAR_POSITION_LESS_THAN_ZERO_ERROR);
     }

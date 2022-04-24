@@ -32,7 +32,7 @@ public class Cars {
 
     private static void validate(List<?> names) {
         if (names == null || names.isEmpty()) {
-            throw new IllegalArgumentException(CarErrors.CARS_EMPTY_ERROR);
+            throw new IllegalStateException(CarErrors.CARS_EMPTY_ERROR);
         }
     }
 
@@ -40,7 +40,7 @@ public class Cars {
         Set<String> unDuplicatedSet = new HashSet<>(names);
 
         if (unDuplicatedSet.size() != names.size()) {
-            throw new IllegalArgumentException(CarErrors.CARS_DUPLICATE_NAME_ERROR);
+            throw new IllegalStateException(CarErrors.CARS_DUPLICATE_NAME_ERROR);
         }
     }
 

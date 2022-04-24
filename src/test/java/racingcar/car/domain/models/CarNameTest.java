@@ -1,7 +1,7 @@
 package racingcar.car.domain.models;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +30,7 @@ class CarNameTest {
         String nameLengthGreaterThan5 = "6글자입니다";
 
         // when, then
-        assertThatIllegalArgumentException()
+        assertThatIllegalStateException()
                 .isThrownBy(() -> new CarName(nameLengthGreaterThan5))
                 .withMessageStartingWith(CarErrors.CAR_NAME_GREATER_THAN_NAME_RULE_ERROR);
     }
@@ -41,7 +41,7 @@ class CarNameTest {
         // given: none
 
         // when, then
-        assertThatIllegalArgumentException()
+        assertThatIllegalStateException()
                 .isThrownBy(() -> new CarName(emptyName))
                 .withMessageStartingWith(CarErrors.CAR_NAME_EMPTY_ERROR);
     }
