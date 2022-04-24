@@ -96,7 +96,7 @@ class CarsTest {
 
     @ParameterizedTest(name = "자동차들 중, 승리자들을 판별한다")
     @MethodSource(value = "get_winners_from_racing_cars_parameter")
-    void get_winners_from_racing_cars(Cars cars, Cars expectedWinners) {
+    void get_winners_from_racing_cars(Cars cars, Winners expectedWinners) {
         // given: none
 
         // when, then
@@ -112,7 +112,7 @@ class CarsTest {
                                 new Car(firstName, 1),
                                 new Car(secondName, 2),
                                 new Car(thirdName, largestPosition))),
-                        new Cars(Collections.singletonList(
+                        new Winners(Collections.singletonList(
                                         new Car(thirdName, largestPosition)))),
                 Arguments.of(
                         // firstName, secondName 이 승리
@@ -120,7 +120,7 @@ class CarsTest {
                                 new Car(firstName, largestPosition),
                                 new Car(secondName, largestPosition),
                                 new Car(thirdName, 2))),
-                        new Cars(Arrays.asList(
+                        new Winners(Arrays.asList(
                                 new Car(firstName, largestPosition),
                                 new Car(secondName, largestPosition)))),
                 Arguments.of(
@@ -129,7 +129,7 @@ class CarsTest {
                                 new Car(firstName, largestPosition),
                                 new Car(secondName, largestPosition),
                                 new Car(thirdName, largestPosition))),
-                        new Cars(Arrays.asList(
+                        new Winners(Arrays.asList(
                                 new Car(firstName, largestPosition),
                                 new Car(secondName, largestPosition),
                                 new Car(thirdName, largestPosition))))

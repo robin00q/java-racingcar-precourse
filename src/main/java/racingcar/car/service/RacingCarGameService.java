@@ -14,7 +14,7 @@ public class RacingCarGameService {
 
     public void play(RacingCarPlayerCommand command) {
         Cars initialCars = Cars.initCarsByName(command.getNames());
-        Cars winners = playAsManyTimesAsTryCount(command, initialCars).getWinners();
+        playAsManyTimesAsTryCount(command, initialCars).getWinners();
     }
 
     private Cars playAsManyTimesAsTryCount(RacingCarPlayerCommand command, Cars cars) {
