@@ -2,7 +2,9 @@ package racingcar.car.service;
 
 import racingcar.car.domain.external.CarMovePolicyStrategy;
 import racingcar.car.domain.models.Cars;
+import racingcar.car.domain.models.Winners;
 import racingcar.car.service.dto.RacingCarPlayerCommand;
+import racingcar.io.GamePlayReader;
 
 public class RacingCarGameService {
 
@@ -12,9 +14,15 @@ public class RacingCarGameService {
         this.strategy = strategy;
     }
 
-    public void play(RacingCarPlayerCommand command) {
+    public void play() {
+        RacingCarPlayerCommand command = getPlayerCommand();
+
         Cars initialCars = Cars.initCarsByName(command.getNames());
-        playAsManyTimesAsTryCount(command, initialCars).getWinners();
+        Winners winners = playAsManyTimesAsTryCount(command, initialCars).getWinners();
+    }
+
+    private RacingCarPlayerCommand getPlayerCommand() {
+        return new RacingCarPlayerCommand(GamePlayReader.readPlayerNameInput(), GamePlayReader.readPlayerTryCount());
     }
 
     private Cars playAsManyTimesAsTryCount(RacingCarPlayerCommand command, Cars cars) {

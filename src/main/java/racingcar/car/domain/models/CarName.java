@@ -6,7 +6,7 @@ import racingcar.util.StringUtils;
 
 public class CarName {
 
-    private static final int MAX_CAR_NAME_LENGTH = 5;
+    public static final int MAX_CAR_NAME_LENGTH = 5;
 
     private final String name;
 
